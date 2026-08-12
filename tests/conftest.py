@@ -22,7 +22,7 @@ def config_file(tmp_path: Path) -> Path:
     """
     path = tmp_path / "config.toml"
     path.write_text(
-        '[app]\ngreeting = "Hey"\ntransform = "lower"\n',
+        '[clistart]\ngreeting = "Hey"\ntransform = "lower"\n',
         encoding="utf-8",
     )
     return path

@@ -17,7 +17,7 @@ readme = "README.md"
 # which was added in 3.11 (no third-party dependency needed).
 requires-python = ">=3.11"
 license = { text = "MIT" }
-authors = [{ name = "Your Name", email = "you@example.com" }]
+authors = [{ name = "Osama", email = "you@example.com" }]
 keywords = ["cli", "starter", "template", "typer"]
 
 # Runtime dependencies — kept deliberately tiny. Typer is the only one.
@@ -33,10 +33,10 @@ dev = [
 ]
 
 [project.scripts]
-# This line is what creates the `app` command in your terminal after you
-# install the package. It points at the Typer app object in src/app/cli.py.
-# Rename the left-hand side ("app") to change the command name.
-app = "app.cli:app"
+# This line is what creates the `clistart` command in your terminal after you
+# install the package. It points at the Typer app object in src/clistart/cli.py.
+# Rename the left-hand side ("clistart") to change the command name.
+clistart = "clistart.cli:app"
 
 [tool.setuptools.packages.find]
 # We use a "src layout": the importable code lives under src/, not in the
@@ -45,7 +45,7 @@ app = "app.cli:app"
 where = ["src"]
 
 [tool.pytest.ini_options]
-# Where the tests live, and how to make `import app` work when running them.
+# Where the tests live, and how to make `import clistart` work when running them.
 testpaths = ["tests"]
 pythonpath = ["src"]
 

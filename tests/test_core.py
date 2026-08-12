@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import pytest
 
-from app.core import apply_transform, word_count
+from clistart.core import apply_transform, word_count
 
 
 @pytest.mark.parametrize(

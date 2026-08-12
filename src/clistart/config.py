@@ -18,10 +18,10 @@ from dataclasses import dataclass, fields
 from pathlib import Path
 from typing import Any
 
-# Environment variables are read with this prefix, e.g. ``APP_GREETING``.
+# Environment variables are read with this prefix, e.g. ``CLISTART_GREETING``.
 # A prefix keeps us from clashing with unrelated variables already in the
 # shell (like a system-wide ``TRANSFORM``, however unlikely).
-ENV_PREFIX = "APP_"
+ENV_PREFIX = "CLISTART_"
 
 
 @dataclass
@@ -38,7 +38,7 @@ class Settings:
 
 
 def _load_file(config_path: Path) -> dict[str, Any]:
-    """Read a TOML config file and return its ``[app]`` table as a dict.
+    """Read a TOML config file and return its ``[clistart]`` table as a dict.
 
     Returns an empty dict if the file does not exist, so a missing config
     file simply means "no overrides" rather than an error.
@@ -47,13 +47,13 @@ def _load_file(config_path: Path) -> dict[str, Any]:
         return {}
     with config_path.open("rb") as fh:  # tomllib requires binary mode
         data = tomllib.load(fh)
-    # We namespace our settings under an [app] table so the file can grow
+    # We namespace our settings under a [clistart] table so the file can grow
     # other sections later without colliding with these keys.
-    return data.get("app", {})
+    return data.get("clistart", {})
 
 
 def _load_env() -> dict[str, Any]:
-    """Collect settings from environment variables named ``APP_<FIELD>``."""
+    """Collect settings from environment variables named ``CLISTART_<FIELD>``."""
     overrides: dict[str, Any] = {}
     for field in fields(Settings):
         env_name = f"{ENV_PREFIX}{field.name.upper()}"

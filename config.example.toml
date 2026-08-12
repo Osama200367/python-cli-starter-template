@@ -7,11 +7,11 @@
 #
 # Remember the precedence order (highest priority wins):
 #
-#   CLI flags  >  environment variables (APP_*)  >  this file  >  defaults
+#   CLI flags  >  environment variables (CLISTART_*)  >  this file  >  defaults
 #
-# So `app process "hi" --transform lower` always beats whatever is set here.
+# So `clistart process "hi" --transform lower` always beats whatever is set here.
 
-[app]
+[clistart]
 # The word the `greet` command uses, e.g. "Hello, World!".
 greeting = "Hello"
 

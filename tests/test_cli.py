@@ -11,8 +11,8 @@ from pathlib import Path
 
 from typer.testing import CliRunner
 
-from app import __version__
-from app.cli import app
+from clistart import __version__
+from clistart.cli import app
 
 runner = CliRunner()
 

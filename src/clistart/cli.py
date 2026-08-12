@@ -17,10 +17,10 @@ from pathlib import Path
 
 import typer
 
-from app import __version__
-from app.config import load_settings
-from app.core import apply_transform, word_count
-from app.logging_setup import configure_logging
+from clistart import __version__
+from clistart.config import load_settings
+from clistart.core import apply_transform, word_count
+from clistart.logging_setup import configure_logging
 
 # ``no_args_is_help`` shows the help screen when someone runs the bare
 # command with no arguments — friendlier than printing an error.
@@ -30,9 +30,9 @@ app = typer.Typer(
     add_completion=False,
 )
 
-# Every module should log through its own named logger. "app" groups all of
-# this project's log lines together.
-log = logging.getLogger("app")
+# Every module should log through its own named logger. "clistart" groups all
+# of this project's log lines together.
+log = logging.getLogger("clistart")
 
 # Where we look for a config file by default, relative to the current
 # directory. Users copy config.example.toml to config.toml to customize.
@@ -62,7 +62,7 @@ def greet(
     """Say hello — the simplest command, to show basic argument wiring.
 
     The greeting word comes from your config (default "Hello"), so
-    ``APP_GREETING=Hi app greet --name Ada`` prints "Hi, Ada!".
+    ``CLISTART_GREETING=Hi clistart greet --name Ada`` prints "Hi, Ada!".
     """
     settings = load_settings(config_path=DEFAULT_CONFIG_PATH)
     for _ in range(times):
@@ -91,7 +91,7 @@ def process(
     This single command exercises the whole template at once: it loads
     layered config, logs its progress, and calls into the core logic. The
     transform mode is resolved with the usual precedence — the
-    ``--transform`` flag beats the ``APP_TRANSFORM`` environment variable,
+    ``--transform`` flag beats the ``CLISTART_TRANSFORM`` environment variable,
     which beats the config file, which beats the built-in default.
     """
     # We pass the CLI value through ``cli_overrides`` and let load_settings
@@ -117,5 +117,5 @@ def process(
 
 
 if __name__ == "__main__":
-    # Lets you run the CLI during development with:  python -m app.cli
+    # Lets you run the CLI during development with:  python -m clistart.cli
     app()
