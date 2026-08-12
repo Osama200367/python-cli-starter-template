@@ -1,0 +1,20 @@
+# Example configuration.
+#
+# To use it, copy this file to "config.toml" in the same folder and edit the
+# values. Anything you leave out falls back to the built-in defaults.
+#
+#   cp config.example.toml config.toml
+#
+# Remember the precedence order (highest priority wins):
+#
+#   CLI flags  >  environment variables (CLISTART_*)  >  this file  >  defaults
+#
+# So `clistart process "hi" --transform lower` always beats whatever is set here.
+
+[clistart]
+# The word the `greet` command uses, e.g. "Hello, World!".
+greeting = "Hello"
+
+# The default transform for the `process` command.
+# Valid options: upper, lower, title, reverse
+transform = "upper"
