@@ -1,0 +1,28 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Packaging / build artifacts
+build/
+dist/
+*.egg-info/
+
+# Test and tooling caches
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Your local, machine-specific config. Users copy config.example.toml to
+# config.toml and edit it; that copy is personal, so it stays out of git.
+config.toml
+
+# Editor / OS noise
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,67 @@
+# pyproject.toml is the single source of truth for this project: what it is,
+# what it depends on, how it's built, and how the tools are configured.
+# (PEP 621 metadata + tool settings all in one file.)
+
+[build-system]
+# setuptools is the boring, universal build backend — it ships with pip and
+# needs nothing extra to learn.
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "python-cli-starter-template"
+version = "0.1.0"
+description = "A beginner-friendly Python CLI starter template with config, logging, and tests."
+readme = "README.md"
+# 3.11+ because we read TOML config with the standard-library `tomllib`,
+# which was added in 3.11 (no third-party dependency needed).
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Your Name", email = "you@example.com" }]
+keywords = ["cli", "starter", "template", "typer"]
+
+# Runtime dependencies — kept deliberately tiny. Typer is the only one.
+dependencies = [
+    "typer>=0.12",
+]
+
+[project.optional-dependencies]
+# Development-only tools. Install them with:  pip install -e ".[dev]"
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+
+[project.scripts]
+# This line is what creates the `app` command in your terminal after you
+# install the package. It points at the Typer app object in src/app/cli.py.
+# Rename the left-hand side ("app") to change the command name.
+app = "app.cli:app"
+
+[tool.setuptools.packages.find]
+# We use a "src layout": the importable code lives under src/, not in the
+# repo root. This prevents a common beginner bug where your tests import the
+# local folder instead of the actually-installed package.
+where = ["src"]
+
+[tool.pytest.ini_options]
+# Where the tests live, and how to make `import app` work when running them.
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# A friendly starter rule set:
+#   E/W = pycodestyle style checks   F = pyflakes (unused imports, etc.)
+#   I   = import sorting             B = common bug patterns (flake8-bugbear)
+#   UP  = suggest modern syntax (pyupgrade)
+select = ["E", "W", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.flake8-bugbear]
+# Typer's whole design is to put `typer.Option(...)` / `typer.Argument(...)`
+# in a parameter's default. That's intentional and safe, so we tell the "no
+# function calls in defaults" rule (B008) to leave these two alone.
+extend-immutable-calls = ["typer.Argument", "typer.Option"]
